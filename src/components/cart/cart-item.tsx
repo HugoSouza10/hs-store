@@ -2,7 +2,8 @@ import { Product } from "@/types/product";
 import { Trash } from "lucide-react";
 import Image from 'next/image';
 
-export default function CartItem() {
+export default function CartItem({product}: any) {
+    console.log(product);
     return (
       <>
         <div className="flex justify-between items-center gap-4 mt-7 mb-5">
@@ -21,12 +22,12 @@ export default function CartItem() {
              <div className="mt-4">
               <div> {/* Container com largura máxima */}
                 <span className="truncate block text-xs"> {/* "block" para ocupar a largura total */}
-                   Logitech MX Master 3s
+                  {product.description}
                 </span>
               </div>
               <div>
-                <span className="font-bold text-sm">R$: 450</span>
-                <span className="text-xs ml-1 line-through text-[#676767]">R$: 500</span>
+                <span className="font-bold text-sm">R$: {product.productWithDiscount}</span>
+                <span className="text-xs ml-1 line-through text-[#676767]">R$: {product.basePrice}</span>
               </div>
             </div>
             <div className="flex items-center justify-center w-8 h-8 border border-[#1A1A1A] rounded-sm p-2">

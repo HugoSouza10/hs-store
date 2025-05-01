@@ -10,10 +10,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from '@/components/ui/badge';
 import CartItem from '../cart/cart-item';
+// Em qualquer componente do carrinho
+import { useCart } from '@/context/CartContext';
 
 const Header = () => {
    const { data: session } = useSession();
-
+   const { products } = useCart();
+   //console.log(products);
    return (
        <header className='mb-7'>
          <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -100,17 +103,9 @@ const Header = () => {
                         </Badge>
                        
                         <ScrollArea className="flex-1 h-[300px] w-full rounded-md border">
-                            {/* Lista de Itens do Carrinho */}
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
-                           <CartItem/>
+                           {products.map(product => (
+                              <CartItem product = {product} key={product.id}/>
+                           ))}
                         </ScrollArea>
                        
                         {/* Total e Botão de Finalizar Compra */}
