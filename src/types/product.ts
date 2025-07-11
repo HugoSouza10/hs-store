@@ -4,7 +4,6 @@ export interface Product {
     description: string;
     basePrice: number;
     discountPercentage: number;
-    productWithDiscount?: number;
     imageUrls: string[];
     categoryId: string;
     slug: string;
