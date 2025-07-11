@@ -1,22 +1,20 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useMemo } from 'react';
+import { ProductWithDiscount } from '../app/helpers/calculatePricing';
 
-//Criando os types do meu context
-interface Product {
-    id: string;
-    description: string;
-    basePrice: number;           // Ex: 882.57
-    productWithDiscount: number; // Ex: 759.00
-    quantity: number;
+//Basicamente adicionar uma propriedade totalPrice no Product
+export interface CartProduct extends ProductWithDiscount {
+   quantity: number;
 }
 
 interface CartContextData  {
-    products: Product[];
+    products: CartProduct[];
     subtotal: Number;
     discount: Number;
     total: Number;
-    addProduct: (product: Product) => void;
+    addProduct: (product: CartProduct) => void;
+    incrementProductQuantity : (id: string, quantity: number) => void;
     removeProduct: (id: string) => void;
     clearCart: () => void;
 }
@@ -28,34 +26,50 @@ const CartContext = createContext<CartContextData>({
     discount: 0,
     total: 0,
     addProduct: () => {},
+    incrementProductQuantity : () => {},
     removeProduct: () => {},
     clearCart: () => {},
 });
 
 // Local onde vai ser exportado e atualizado disponibilizando assim para todos os componentes.
 export const CartProvider = ({children}: {children: ReactNode}) => {
-    const  [products, setProducts] = useState<Product[]>([
-        {
-            id: '1',
-            description: 'Combo Sushi Especial',
+    const  [products, setProducts] = useState<CartProduct[]>([
+       {
+            id: "1",
+            name: "Combo Sushi Especial",
+            description: "Delicioso combo de sushi com variedade especial.",
             basePrice: 882.57,
             productWithDiscount: 759.0,
-            quantity: 1,
-          },
-          {
-            id: '2',
-            description: 'Temaki de Salmão',
+            discountPercentage: 14,
+            imageUrls: ["https://example.com/combo-sushi.jpg"],
+            categoryId: "sushi",
+            slug: "combo-sushi-especial",
+            quantity: 100,
+        },
+        {
+            id: "2",
+            name: "Temaki de Salmão",
+            description: "Temaki recheado com salmão fresco e ingredientes selecionados.",
             basePrice: 35.9,
             productWithDiscount: 29.9,
+            discountPercentage: 16,
+            imageUrls: ["https://example.com/temaki-salmao.jpg"],
+            categoryId: "temaki",
+            slug: "temaki-salmao",
             quantity: 2,
-          },
-          {
-            id: '3',
-            description: 'Uramaki Philadelphia',
+        },
+        {
+            id: "3",
+            name: "Uramaki Philadelphia",
+            description: "Uramaki recheado com salmão, cream cheese e cebolinha.",
             basePrice: 42.0,
             productWithDiscount: 39.0,
+            discountPercentage: 7,
+            imageUrls: ["https://example.com/uramaki-philadelphia.jpg"],
+            categoryId: "uramaki",
+            slug: "uramaki-philadelphia",
             quantity: 1,
-          },
+        },
     ]);
 
     const subtotal = useMemo(()=> {
@@ -68,15 +82,24 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
 
     const discount = useMemo(() => subtotal - total, [subtotal, total]);
 
-    const addProduct = (product: Product) => {
+    //Função especifica para adicionar um único produto
+    const addProduct = (product: CartProduct) => {
         setProducts((prev) => [...prev, product]);
+    };
+    //Função especifica para aumentar a quantidade de produto
+    const incrementProductQuantity  = (id: string, quantity: number) => {
+      setProducts((products) =>
+        products.map((p) =>
+          p.id === id ? { ...p, quantity: p.quantity + quantity } : p
+        ).filter((p) => p.quantity > 0)
+      );
     };
     const removeProduct = (id: string) => {
         setProducts((prev) => prev.filter((p) => p.id !== id));
     };
     const clearCart = () => {
         setProducts([]);
-      };
+    };
 
     //Retornar o conteúdo do provider atualizado
     return (
@@ -87,6 +110,7 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
             discount,
             total,
             addProduct,
+            incrementProductQuantity ,
             removeProduct,
             clearCart,
           }}

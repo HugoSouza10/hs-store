@@ -1,6 +1,6 @@
 import { Product } from "@/types/product";
 
-interface ProductWithDiscount extends Product {
+export interface ProductWithDiscount extends Product {
     productWithDiscount: number;
 }
 
