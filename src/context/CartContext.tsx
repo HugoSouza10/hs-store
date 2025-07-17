@@ -11,7 +11,7 @@ export interface CartProduct extends ProductWithDiscount {
 interface CartContextData  {
     products: CartProduct[];
     subtotal: Number;
-    discount: Number;
+    totalDiscount: Number;
     total: Number;
     addProduct: (product: CartProduct) => void;
     incrementProductQuantity : (id: string, quantity: number) => void;
@@ -23,7 +23,7 @@ interface CartContextData  {
 const CartContext = createContext<CartContextData>({
     products: [],
     subtotal: 0,
-    discount: 0,
+    totalDiscount: 0,
     total: 0,
     addProduct: () => {},
     incrementProductQuantity : () => {},
@@ -44,7 +44,7 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
             imageUrls: ["https://example.com/combo-sushi.jpg"],
             categoryId: "sushi",
             slug: "combo-sushi-especial",
-            quantity: 100,
+            quantity: 1,
         },
         {
             id: "2",
@@ -73,14 +73,16 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
     ]);
 
     const subtotal = useMemo(()=> {
-        return products.reduce((sum, product) => sum + product.basePrice * product.quantity, 0);
+        return products.reduce((sum, product) => sum + (product.basePrice * product.quantity), 0);
     }, [products]);
 
+    const totalDiscount = useMemo(()=> {
+        return products.reduce((sum, product) => sum + (Math.max(0, (product.basePrice  -  product.productWithDiscount)) * product.quantity), 0);
+    }, [products]);
+    
     const total = useMemo(() => {
-        return products.reduce((sum, product) => sum + product.productWithDiscount * product.quantity, 0);
+        return subtotal - totalDiscount;
     }, [products]);
-
-    const discount = useMemo(() => subtotal - total, [subtotal, total]);
 
     //Função especifica para adicionar um único produto
     const addProduct = (product: CartProduct) => {
@@ -107,7 +109,7 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
           value={{
             products,
             subtotal,
-            discount,
+            totalDiscount,
             total,
             addProduct,
             incrementProductQuantity ,
