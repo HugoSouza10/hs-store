@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Menu, ShoppingCart, HouseIcon, LogOutIcon, PercentIcon, ListOrderedIcon, User, ShoppingCartIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { SheetContent, SheetTrigger, Sheet, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,7 +16,7 @@ import { useCart } from '@/context/CartContext';
 
 const Header = () => {
    const { data: session } = useSession();
-   const { products } = useCart();
+   const { products, subtotal, totalDiscount, total} = useCart();
    //console.log(products);
    return (
        <header className='mb-7'>
@@ -110,14 +111,29 @@ const Header = () => {
                        
                         {/* Total e Botão de Finalizar Compra */}
                         <div className='mt-11'>
-                           <div className="flex justify-between">
-                              <div className='flex flex-col'>
-                                 <span className='text-xs'>Subtotal</span>
-                                 <span className='text-xs'>Entrega</span>
-                                 <span className='text-xs'>Descontos</span>
-                                 <span className='font-bold text-sm'>Total</span>
+                           <div>
+                              <div>
+                                 <Separator className='bg-accent' />
+                                 <div className='flex justify-between'>
+                                    <span className='text-xs pt-2 pb-2'>Subtotal</span>
+                                    <span className='text-xs pt-2 pb-2'>{subtotal.toFixed(2)}</span>
+                                 </div>
+                                 <Separator className='bg-accent' />
+                                 <div className='flex justify-between'>
+                                    <span className='text-xs pt-2 pb-2'>Entrega</span>
+                                    <span className='text-xs pt-2 pb-2'>GRÁTIS</span>
+                                 </div>
+                                 <Separator className='bg-accent' />
+                                 <div className='flex justify-between'>
+                                    <span className='text-xs pt-2 pb-2'>Desconto</span>
+                                    <span className='text-xs pt-2 pb-2'>-R$ {totalDiscount.toFixed(2)}</span>
+                                 </div>
+                                 <Separator className='bg-accent' />
+                                  <div className='flex justify-between font-bold'>
+                                    <span className='text-xs pt-2 pb-2'>Total</span>
+                                    <span className=' text-xs pt-2 pb-2'>R$ {total.toFixed(2)}</span>
+                                 </div>
                               </div>
-                              ....
                               
                            </div>
                            <Button className="mt-4 w-full">Finalizar Compra</Button>
