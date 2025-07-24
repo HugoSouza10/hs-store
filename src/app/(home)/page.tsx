@@ -27,7 +27,7 @@ async function fetchKeyboard() {
   const data = await response.json();
   // Filtra os produtos da categoria "keyboards" e com desconto
    // Filtra os produtos da categoria "keyboards"
-   return data.filter((product: {slug: string}) => product.slug === "keyboards");
+   return data.filter((product: {categoryId: string}) => product.categoryId === "2");
 }
 
 //Função para filtrar todos Mouses
@@ -39,7 +39,7 @@ async function fetchMouse() {
   const data = await response.json();
   // Filtra os produtos da categoria "keyboards" e com desconto
    // Filtra os produtos da categoria "keyboards"
-   return data.filter((product: {slug: string}) => product.slug === "mouses");
+   return data.filter((product: {categoryId: string}) => product.categoryId === "1");
 }
 
 export default async function Home() {
