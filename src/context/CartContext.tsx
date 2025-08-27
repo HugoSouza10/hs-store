@@ -33,44 +33,7 @@ const CartContext = createContext<CartContextData>({
 
 // Local onde vai ser exportado e atualizado disponibilizando assim para todos os componentes.
 export const CartProvider = ({children}: {children: ReactNode}) => {
-    const  [products, setProducts] = useState<CartProduct[]>([
-       {
-            id: "1",
-            name: "Combo Sushi Especial",
-            description: "Delicioso combo de sushi com variedade especial.",
-            basePrice: 882.57,
-            productWithDiscount: 759.0,
-            discountPercentage: 14,
-            imageUrls: ["https://example.com/combo-sushi.jpg"],
-            categoryId: "sushi",
-            slug: "combo-sushi-especial",
-            quantity: 1,
-        },
-        {
-            id: "2",
-            name: "Temaki de Salmão",
-            description: "Temaki recheado com salmão fresco e ingredientes selecionados.",
-            basePrice: 35.9,
-            productWithDiscount: 29.9,
-            discountPercentage: 16,
-            imageUrls: ["https://example.com/temaki-salmao.jpg"],
-            categoryId: "temaki",
-            slug: "temaki-salmao",
-            quantity: 2,
-        },
-        {
-            id: "3",
-            name: "Uramaki Philadelphia",
-            description: "Uramaki recheado com salmão, cream cheese e cebolinha.",
-            basePrice: 42.0,
-            productWithDiscount: 39.0,
-            discountPercentage: 7,
-            imageUrls: ["https://example.com/uramaki-philadelphia.jpg"],
-            categoryId: "uramaki",
-            slug: "uramaki-philadelphia",
-            quantity: 1,
-        },
-    ]);
+    const  [products, setProducts] = useState<CartProduct[]>([]);
 
     const subtotal = useMemo(()=> {
         return products.reduce((sum, product) => sum + (product.basePrice * product.quantity), 0);
@@ -86,7 +49,16 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
 
     //Função especifica para adicionar um único produto
     const addProduct = (product: CartProduct) => {
-        setProducts((prev) => [...prev, product]);
+        setProducts((prev) => {
+            const existingProductIndex = prev.findIndex((p) => p.id === product.id);
+            if(existingProductIndex !== -1) {
+                incrementProductQuantity(product.id, 1); // Incrementa a quantidade em 1
+            }else {
+                 // Produto não existe, adiciona com a quantidade 1
+                 return [...prev, { ...product, quantity: 1 }];
+            }
+            return prev; // Retorna o carrinho sem mudanças (a quantidade foi ajustada na função de incremento)
+        });
     };
     //Função especifica para aumentar a quantidade de produto
     const incrementProductQuantity  = (id: string, quantity: number) => {
