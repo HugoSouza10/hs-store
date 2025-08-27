@@ -7,9 +7,12 @@ export const ProductPrice = ({ product }: { product: Product }) => {
       <div>
         <div className="flex">
           <div className="font-bold text-xl">R$: {product.productWithDiscount}</div>
-          <Badge className="rounded-full ml-2">
-            {product.discountPercentage}%
-          </Badge>
+          {product.discountPercentage > 0 && (
+            <Badge className="rounded-full ml-2">
+                {product.discountPercentage}%
+            </Badge>
+          )}
+          
         </div>
 
         <div className="text-xs line-through text-[#676767]">
