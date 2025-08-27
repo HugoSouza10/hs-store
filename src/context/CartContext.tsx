@@ -5,7 +5,7 @@ import { ProductWithDiscount } from '../app/helpers/calculatePricing';
 
 //Basicamente adicionar uma propriedade totalPrice no Product
 export interface CartProduct extends ProductWithDiscount {
-   quantity: number;
+   quantity: number | 1;
 }
 
 interface CartContextData  {

@@ -86,7 +86,7 @@ const Header = () => {
                </SheetContent>
             </Sheet>
             <Link href="/" className="text-lg font-medium">
-               <span className="font-bold bg-gradient-to-r from-[#5033C3] to-[#8162FF] bg-clip-text text-transparent"> FSW </span>
+               <span className="font-bold bg-gradient-to-r from-[#5033C3] to-[#8162FF] bg-clip-text text-transparent"> HC </span>
                <span>Store</span>
             </Link>
              {/* Carrinho */}

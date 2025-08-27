@@ -6,7 +6,7 @@ export const products = [
     id: "1",
     name: "Logitech MX Master 3s",
     slug: "Logitech MX Master 3s",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     basePrice: 500,
     discountPercentage: 10,
     imageUrls: [
