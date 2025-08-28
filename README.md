@@ -59,7 +59,9 @@ cd hs-store
 ### 2. Instale as dependências
 ```bash
 npm install
+```
 # ou
+```bash
 yarn install
 ```
 
