@@ -8,8 +8,23 @@
 
 Uma loja virtual moderna e completa especializada em produtos de tecnologia, desenvolvida com as mais recentes tecnologias do ecossistema React/Next.js.
 
-<img width="459" height="793" alt="image" src="https://github.com/user-attachments/assets/7950194e-1fe9-420c-8930-d1ecd4c22d84" />
+## 🎯 Preview do Projeto
 
+Abaixo está uma captura de tela da interface principal da aplicação, mostrando o catálogo de produtos e a navegação intuitiva:
+
+<div align="center">
+  <img 
+    width="300" 
+    src="https://github.com/user-attachments/assets/a7c6527b-bed8-4020-ae50-205fd9aec740" 
+    alt="TechStore - Loja Virtual de Tecnologia"
+    style="
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    "
+  />
+</div>
 
 ## ✨ Funcionalidades
 
