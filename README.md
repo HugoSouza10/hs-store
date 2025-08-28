@@ -8,7 +8,8 @@
 
 Uma loja virtual moderna e completa especializada em produtos de tecnologia, desenvolvida com as mais recentes tecnologias do ecossistema React/Next.js.
 
-![Preview da Loja](./preview.png) <!-- Adicione uma imagem real do seu projeto posteriormente -->
+<img width="459" height="793" alt="image" src="https://github.com/user-attachments/assets/7950194e-1fe9-420c-8930-d1ecd4c22d84" />
+
 
 ## ✨ Funcionalidades
 
@@ -31,11 +32,9 @@ Uma loja virtual moderna e completa especializada em produtos de tecnologia, des
 
 ### Autenticação & Gerenciamento de Estado
 - **Next Auth** - Autenticação segura e simplificada
-- **React Hook Form** - Manipulação de formulários
-- **Zod** - Validação de esquemas TypeScript-first
+- **Context API** - Autenticação segura e simplificada
 
 ### Outras Ferramentas
 - **Lucide Icons** - Conjunto de ícones elegantes
-- **clsx** - Utilidade para concatenar classes CSS condicionalmente
 
 ## 📦 Estrutura do Projeto
