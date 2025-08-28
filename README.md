@@ -10,7 +10,7 @@ Uma loja virtual moderna e completa especializada em produtos de tecnologia, des
 
 ## 🎯 Preview do Projeto
 
-<img width="839" height="680" alt="image" src="https://github.com/user-attachments/assets/a37d6515-8b34-4113-8721-b361ee41b86d" />
+<img width="555" height="697" alt="image" src="https://github.com/user-attachments/assets/ade16e68-fe30-4e0b-92a6-5ac1b332ce5f" />
 
 
 ## ✨ Funcionalidades
