@@ -71,7 +71,9 @@ Crie um arquivo chamado .env.local na raiz do projeto e insira suas credenciais 
 ### 4. Configure as variáveis de ambiente
 ```bash
 npm run dev
-# ou
+```
+#### ou
+```bash
 yarn dev
 ```
 
