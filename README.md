@@ -10,7 +10,7 @@ Uma loja virtual moderna e completa especializada em produtos de tecnologia, des
 
 ## 🎯 Preview do Projeto
 
-<div align="center">
+<div>
   <h3>📱 Interface Completa da Loja Virtual</h3>
   
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; justify-items: center; margin: 30px 0; width: 100%;">
