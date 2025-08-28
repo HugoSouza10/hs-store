@@ -1,4 +1,4 @@
-# 🛍️ HsStore - Loja Virtual de Tecnologia
+# 🛍️ Hs Store - Loja Virtual de Tecnologia
 
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
 ![Next.js](https://img.shields.io/badge/Next.js-14.0-black)
@@ -39,4 +39,17 @@ Uma loja virtual moderna e completa especializada em produtos de tecnologia, des
 ### Outras Ferramentas
 - **Lucide Icons** - Conjunto de ícones elegantes
 
-## 📦 Estrutura do Projeto
+
+## 🎯 Como Executar o Projeto
+
+### Pré-requisitos
+- Node.js 18.17 ou superior
+- npm ou yarn
+
+### Passos para Instalação
+
+**Clone o repositório**
+   ```bash
+   git clone git@github.com:HugoSouza10/hs-store.git
+   git clone https://github.com/HugoSouza10/hs-store.git
+
