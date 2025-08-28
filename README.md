@@ -1,4 +1,4 @@
-# 🛍️ TechStore - Loja Virtual de Tecnologia
+# 🛍️ HsStore - Loja Virtual de Tecnologia
 
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
 ![Next.js](https://img.shields.io/badge/Next.js-14.0-black)
