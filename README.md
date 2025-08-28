@@ -60,7 +60,7 @@ cd hs-store
 ```bash
 npm install
 ```
-# ou
+### ou
 ```bash
 yarn install
 ```
