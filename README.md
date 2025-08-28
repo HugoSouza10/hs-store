@@ -48,8 +48,30 @@ Uma loja virtual moderna e completa especializada em produtos de tecnologia, des
 
 ### Passos para Instalação
 
-**Clone o repositório**
-   ```bash
-   git clone git@github.com:HugoSouza10/hs-store.git
-   git clone https://github.com/HugoSouza10/hs-store.git
+## 📦 Instalação e Configuração
 
+### 1. Clone o repositório
+```bash
+git clone git@github.com:HugoSouza10/hs-store.git
+cd hs-store
+```
+
+### 2. Instale as dependências
+```bash
+npm install
+# ou
+yarn install
+```
+
+### 3. Configure as variáveis de ambiente
+Crie um arquivo chamado .env.local na raiz do projeto e insira suas credenciais de acesso neste arquivo.
+
+### 4. Configure as variáveis de ambiente
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+## 📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
