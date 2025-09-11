@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { AddToCartButton } from "../components/AddToCartButton";
 import { ProductInfo } from "../components/ProductInfo";
 import { ProductPrice } from "../components/ProductPrice";
+import { ShippingInfo } from "../components/ShippingInfo";
 
 // Fetch no servidor (SSR)
 const getProduct = async (slug: string): Promise<Product> => {
@@ -36,6 +37,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
               </section>
                {/* Botão Adicionar ao Carrinho */}
               <AddToCartButton product={product}/>
+              <ShippingInfo/>
             </article>
         </div>
   );
