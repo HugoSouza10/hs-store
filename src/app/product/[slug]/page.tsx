@@ -1,6 +1,7 @@
 
 import ProductGallery from "../components/ProductGallery";
 import { Product } from "@/types/product";
+import { getProduct, fetchRelated } from '@/app/_data_access/productData';
 import { calculateDiscountedPrice } from "@/app/helpers/calculatePricing";
 import { AddToCartButton } from "../components/AddToCartButton";
 import { ProductInfo } from "../components/ProductInfo";
@@ -10,22 +11,6 @@ import { SectionTitle } from "@/components/ui/section-title";
 import { ProductList } from "@/components/ui/product-list";
 
 // Fetch no servidor (SSR)
-const getProduct = async (slug: string): Promise<Product> => {
-  const res = await fetch(`http://localhost:3000/api/product/${slug}`) // ou "force-cache" se quiser usar SSG);
-  if (!res.ok) throw new Error("Produto não encontrado");
-  return res.json();
-};
-
-async function fetchRelated() {
-  const response = await fetch('http://localhost:3000/api/product');
-  if (!response.ok) {
-    throw new Error('Falha ao buscar produtos');
-  }
-  const data = await response.json();
-  // Filtra os produtos com desconto
-  return data.filter((product: {discountPercentage: number}) => product.discountPercentage > 0)
-}
-
 const ProductDetail = async ({ params }: { params: { slug: string } }) => {
   const data = await getProduct(params.slug);
   const product = calculateDiscountedPrice(data);

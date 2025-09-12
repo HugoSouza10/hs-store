@@ -6,46 +6,12 @@ import banner1 from './img/banner-home-1.png';
 import banner2 from './img/banner-home-2.png';
 import banner3 from './img/banner-home-3.png';
 import { ProductList } from "@/components/ui/product-list";
-
-// Função para buscar todos os produtos na qual discount é diferente de 0
-async function fetchDeals() {
-  const response = await fetch('http://localhost:3000/api/product');
-  if (!response.ok) {
-    throw new Error('Falha ao buscar produtos');
-  }
-  const data = await response.json();
-  // Filtra os produtos com desconto
-  return data.filter((product: {discountPercentage: number}) => product.discountPercentage > 0)
-}
-
-//Função para filtrar todos teclados
-async function fetchKeyboard() {
-  const response = await fetch('http://localhost:3000/api/product');
-  if (!response.ok) {
-    throw new Error('Falha ao buscar produtos');
-  }
-  const data = await response.json();
-  // Filtra os produtos da categoria "keyboards" e com desconto
-   // Filtra os produtos da categoria "keyboards"
-   return data.filter((product: {categoryId: string}) => product.categoryId === "2");
-}
-
-//Função para filtrar todos Mouses
-async function fetchMouse() {
-  const response = await fetch('http://localhost:3000/api/product');
-  if (!response.ok) {
-    throw new Error('Falha ao buscar produtos');
-  }
-  const data = await response.json();
-  // Filtra os produtos da categoria "keyboards" e com desconto
-   // Filtra os produtos da categoria "keyboards"
-   return data.filter((product: {categoryId: string}) => product.categoryId === "1");
-}
+import { getDeals, getKeyboards, getMouses } from "../_data_access/productData";
 
 export default async function Home() {
-  const deals = await fetchDeals(); // Busca os dados no servidor
-  const keyboard = await fetchKeyboard();
-  const mouses = await fetchMouse();
+  const deals = await getDeals();  // Busca os dados no servidor
+  const keyboard = await getKeyboards();
+  const mouses = await getMouses();
   return (
     <main className="pl-4 pr-4">
       <div className="banner-home-1">
