@@ -23,6 +23,10 @@ export async function getProduct(slug: string) {
 export async function getDeals() {
   return await fetchProducts((product: { discountPercentage: number }) => product.discountPercentage > 0);
 }
+//Função para busca produtos pela a categoria
+export async function getProductsByCategory(categoryId: string) {
+  return await fetchProducts((product: { categoryId: string }) => product.categoryId === categoryId);
+}
 
 // Função para filtrar teclados
 export async function getKeyboards() {
