@@ -7,29 +7,23 @@ import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
 
 interface ProductListProps {
     product: ProductWithDiscount;
+    layout?: "grid" | "carousel"
 }
 
-export const ProductItem = ({product}: ProductListProps) => {
-   const { addProduct } = useCart();
-
-  const handleAddProduct = () => {
-        const cartProduct: CartProduct = {
-            ...product,
-            quantity: 1 // Valor padrão ao adicionar ao carrinho
-        };
-        addProduct(cartProduct);
-   }
+export const ProductItem = ({product, layout = "carousel"}: ProductListProps) => {
+   // largura muda de acordo com o layout
+   const cardWidth = layout === "grid" ? "w-full" : "w-[156px]";
    return (
    <>
     {/*Area da foto */}
     <Link href={`product/${product.slug}`}>
       <div className="flex-col gap-4 px-0">
       
-         <div className="relative flex flex-col items-center justify-center rounded-sm w-[156px] h-[170px] bg-accent">
+         <div className={`relative flex flex-col items-center justify-center rounded-sm ${cardWidth} h-[170px] bg-accent`}>
             {/* Tag de desconto */}
             <div className="absolute p-2 top-0 left-0 font-bold">
             {product.discountPercentage > 0 &&(
-                  <Badge onClick={handleAddProduct} className="rounded-full">
+                  <Badge className="rounded-full">
                      {product.discountPercentage}%
                   </Badge> 
             )}
