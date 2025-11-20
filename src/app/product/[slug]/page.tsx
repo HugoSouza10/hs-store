@@ -27,7 +27,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
               {/* Descrição do produto */}
               <section className="mt-7">
                 <h2 className="font-bold text-sm">Descrição</h2>
-                <p className="text-xs text-[#676767]">{product.description}</p>
+                <p className="text-xs text-[#676767] mt-2">{product.description}</p>
               </section>
                {/* Botão Adicionar ao Carrinho */}
               <AddToCartButton product={product}/>
