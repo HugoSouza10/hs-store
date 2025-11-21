@@ -13,7 +13,7 @@ export default async function Category({
   //Precisamos pegar os produtos baseado no slug
   const data = await getProductsByCategory(slug);
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-3 gap-4 ml-4 mr-4">
+    <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-3 gap-4 ml-4 mr-4 mb-7">
       {data.length > 0 ? (
         data.map((product: Product) => (
           <ProductItem
