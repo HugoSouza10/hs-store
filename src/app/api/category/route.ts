@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 
 const category = [
   {slug: "keyboards", name: "Teclados" },
-  {slug: "monitors", name: "Mouses" },
+  {slug: "mouses", name: "Mouses" },
   {slug: "headphones", name: "Fones" },
   {slug: "mousepads", name: "Mousepads" },
-  {slug: "mouses", name: "Monitores" },
+  {slug: "monitors", name: "Monitores" },
   {slug: "speakers", name: "Speakers" },
 ];
 

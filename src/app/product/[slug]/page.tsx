@@ -1,7 +1,7 @@
 
 import ProductGallery from "../components/ProductGallery";
 import { Product } from "@/types/product";
-import { getProduct, fetchRelated } from '@/app/_data_access/productData';
+import { getProduct, getProductRelated} from '@/app/_data_access/productData';
 import { calculateDiscountedPrice } from "@/app/helpers/calculatePricing";
 import { AddToCartButton } from "../components/AddToCartButton";
 import { ProductInfo } from "../components/ProductInfo";
@@ -14,7 +14,7 @@ import { ProductList } from "@/components/ui/product-list";
 const ProductDetail = async ({ params }: { params: { slug: string } }) => {
   const data = await getProduct(params.slug);
   const product = calculateDiscountedPrice(data);
-  const relatedProducts = await fetchRelated();
+  const relatedProducts = await getProductRelated();
   return (
          <div>
             <ProductGallery
