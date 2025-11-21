@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+
 import { ProductItem } from "@/components/ui/product-item";
 import { calculateDiscountedPrice } from "@/app/helpers/calculatePricing";
 import { getProductsByCategory } from "@/app/_data_access/productData";
@@ -12,7 +11,7 @@ export default async function Category({
 }) {
   const { slug } = params;
   //Precisamos pegar os produtos baseado no slug
-  const data = await getProductsByCategory("2");
+  const data = await getProductsByCategory(slug);
   return (
     <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-3 gap-4 ml-4 mr-4">
       {data.length > 0 ? (

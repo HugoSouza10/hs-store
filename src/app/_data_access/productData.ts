@@ -2,7 +2,7 @@
 import { fetchData } from '../_data_access/fetchData';
 import { Product } from '@/types/product';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000/';
 
 // Função genérica para buscar produtos com um filtro opcional
 async function fetchProducts(filterFn?: (product: Product) => boolean) {
@@ -24,21 +24,11 @@ export async function getDeals() {
   return await fetchProducts((product: { discountPercentage: number }) => product.discountPercentage > 0);
 }
 //Função para busca produtos pela a categoria
-export async function getProductsByCategory(categoryId: string) {
-  return await fetchProducts((product: { categoryId: string }) => product.categoryId === categoryId);
-}
-
-// Função para filtrar teclados
-export async function getKeyboards() {
-  return await fetchProducts((product: { categoryId: string }) => product.categoryId === "2");
-}
-
-// Função para filtrar mouses
-export async function getMouses() {
-  return await fetchProducts((product: { categoryId: string }) => product.categoryId === "1");
+export async function getProductsByCategory(categorySlug: string) {
+  return await fetchProducts((product: { categorySlug: string }) => product.categorySlug === categorySlug);
 }
 
 // Função para buscar produtos relacionados com desconto
-export async function fetchRelated() {
+export async function getProductRelated() {
   return await fetchProducts((product: { discountPercentage: number }) => product.discountPercentage > 0);
 }

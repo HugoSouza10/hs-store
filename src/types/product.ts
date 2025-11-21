@@ -6,6 +6,7 @@ export interface Product {
     discountPercentage: number;
     imageUrls: string[];
     categoryId: string;
+    categorySlug: string;
     slug: string;
     productWithDiscount?: number;
 }
