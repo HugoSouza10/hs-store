@@ -1,19 +1,11 @@
-// app/categories/page.tsx (ou dentro de uma pasta de Server Component)
+import { getCategoriesAll } from '@/app/_data_access/categoryData';
 import { CATEGORY_ICON } from '@/constants/categories-icon';
 import Link from 'next/link';
 
-// Função para buscar as categorias no servidor
-async function fetchCategories() {
-  const response = await fetch('http://localhost:3000/api/category');
-  if (!response.ok) {
-    throw new Error('Falha ao buscar categorias');
-  }
-  return response.json();
-}
-
 // Componente de categoria no lado do servidor
 export default async function CategoriesPage() {
-  const categories = await fetchCategories(); // Busca as categorias diretamente no servidor
+  // Função para buscar as categorias no servidor
+  const categories = await getCategoriesAll(); // Busca as categorias diretamente no servidor
 
   return (
     <div className='grid grid-cols-2 gap-4 mt-7'>
