@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { CartProvider } from '@/context/CartContext';
+import { Toaster } from "@/components/ui/sonner"
 
 // Configuração da fonte Inter
 const inter = Inter({ subsets: ['latin'] });
@@ -28,6 +29,7 @@ export default function RootLayout({
             {children}
           </CartProvider>
           <Footer/>
+          <Toaster/>
         </body>
       </html>
     </SessionProvider>

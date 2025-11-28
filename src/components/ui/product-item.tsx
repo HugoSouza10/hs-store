@@ -16,7 +16,7 @@ export const ProductItem = ({product, layout = "carousel"}: ProductListProps) =>
    return (
    <>
     {/*Area da foto */}
-    <Link href={`product/${product.slug}`}>
+    <Link href={`/product/${product.slug}`}>
       <div className="flex-col gap-4 px-0">
       
          <div className={`relative flex flex-col items-center justify-center rounded-sm ${cardWidth} h-[170px] bg-accent`}>
