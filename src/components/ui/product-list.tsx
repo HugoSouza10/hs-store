@@ -11,7 +11,7 @@ export const ProductList = ({ products }: ProductListProps) => {
         <div className="flex w-full mt-5 mb-7 gap-4 overflow-x-auto  [&::-webkit-scrollbar]:hidden">
           {products.length > 0 ? (
             products.map((product)=>
-               <ProductItem product={calculateDiscountedPrice(product)} key={product.id}/>
+              <ProductItem product={calculateDiscountedPrice(product)} key={product.id}/>
             )
           ) : (
             <p>Nenhum produto encontrado</p>

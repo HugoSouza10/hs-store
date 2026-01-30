@@ -2,24 +2,17 @@
 import Image from "next/image"
 import { Badge } from "./badge"
 import Link from "next/link"
-import { CartProduct, useCart } from "@/context/CartContext";
 import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
 
-interface ProductListProps {
-    product: ProductWithDiscount;
-    layout?: "grid" | "carousel"
-}
 
-export const ProductItem = ({product, layout = "carousel"}: ProductListProps) => {
-   // largura muda de acordo com o layout
-   const cardWidth = layout === "grid" ? "w-full" : "w-[156px]";
+export const ProductItem = ({product}: {product: ProductWithDiscount}) => {
    return (
    <>
     {/*Area da foto */}
     <Link href={`/product/${product.slug}`}>
       <div className="flex-col gap-4 px-0">
       
-         <div className={`relative flex flex-col items-center justify-center rounded-sm ${cardWidth} h-[170px] bg-accent`}>
+         <div className={`relative flex flex-col items-center justify-center rounded-sm  h-[170px] bg-accent`}>
             {/* Tag de desconto */}
             <div className="absolute p-2 top-0 left-0 font-bold">
             {product.discountPercentage > 0 &&(

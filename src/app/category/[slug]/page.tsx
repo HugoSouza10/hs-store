@@ -26,7 +26,6 @@ export default async function Category({
             <ProductItem
               product={calculateDiscountedPrice(product)}
               key={product.id}
-              layout="grid"
             />
           ))
         ) : (
