@@ -1,5 +1,5 @@
 
-
+"use client";
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Menu, ShoppingCart, HouseIcon, LogOutIcon, PercentIcon, ListOrderedIcon, User, ShoppingCartIcon } from "lucide-react";
@@ -11,13 +11,30 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from '@/components/ui/badge';
 import CartItem from '../cart/cart-item';
+import { createCheckout } from '@/services/payment';
 // Em qualquer componente do carrinho
 import { useCart } from '@/context/CartContext';
+import { useState } from 'react';
+
 
 const Header = () => {
    const { data: session } = useSession();
    const { products, subtotal, totalDiscount, total} = useCart();
-   //console.log(products);
+   const [loading, setLoading] = useState(false);
+
+   async function handleCheckout() {
+      try {
+         setLoading(true);
+         const data = await createCheckout(products);
+         if (data.checkout) {
+            window.location.href = data.checkout;
+         }
+       } catch (error) {
+         console.error(error);
+       } finally {
+         setLoading(false);
+       }
+   }
    return (
        <header className='mb-7'>
          <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -136,7 +153,13 @@ const Header = () => {
                               </div>
                               
                            </div>
-                           <Button className="mt-4 w-full">Finalizar Compra</Button>
+                           <Button 
+                              onClick={handleCheckout}
+                              disabled={loading}
+                              className="mt-4 w-full"
+                              >
+                              {loading ? 'Processando...' : 'Finalizar Compra'}
+                           </Button>
                         </div>
                      </div>
                   </SheetContent>
