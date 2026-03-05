@@ -8,6 +8,8 @@ const client = new MercadoPagoConfig({
 });
 
 export async function POST(request: NextRequest) {
+  const { products } = await request.json();
+  console.log('Produtos recebidos para pagamento:', products);
   try {
     const data  =  {
       id: `prod_${Date.now()}`,
