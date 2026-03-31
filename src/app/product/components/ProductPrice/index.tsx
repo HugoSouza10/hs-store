@@ -16,7 +16,7 @@ export const ProductPrice = ({ product }: { product: Product }) => {
         </div>
 
         <div className="text-xs line-through text-[#676767]">
-          R$: {product.basePrice}
+          R$: {Number(product.basePrice).toFixed(2)}
         </div>
       </div>
     </div>

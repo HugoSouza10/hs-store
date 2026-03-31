@@ -18,7 +18,7 @@ export default function CartItem({product}: any) {
         <div className="flex justify-between items-center gap-4 mt-7 mb-5">
             {/*Imagem do produto */}
              <Image
-                src={`https://utfs.io/f/80787132-a9cb-41ce-ae4d-5c38b359723d-33zg48.png`}
+                src={product.imageUrls[0]} // Usando a primeira imagem do array
                 width={0}
                 height={0}
                 sizes="100vw"

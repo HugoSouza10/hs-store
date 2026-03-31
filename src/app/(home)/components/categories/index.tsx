@@ -1,11 +1,12 @@
 import { getCategoriesAll } from '@/app/_data_access/categoryData';
 import { CATEGORY_ICON } from '@/constants/categories-icon';
+import { db } from '@/lib/prisma';
 import Link from 'next/link';
 
 // Componente de categoria no lado do servidor
 export default async function CategoriesPage() {
   // Função para buscar as categorias no servidor
-  const categories = await getCategoriesAll(); // Busca as categorias diretamente no servidor
+  const categories = await db.category.findMany(); // Busca as categorias diretamente no servidor
 
   return (
     <div className='grid grid-cols-2 gap-4 mt-7'>

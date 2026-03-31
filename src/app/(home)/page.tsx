@@ -5,15 +5,33 @@ import banner1 from "./img/banner-home-1.png";
 import banner2 from "./img/banner-home-2.png";
 import banner3 from "./img/banner-home-3.png";
 import { ProductList } from "@/components/ui/product-list";
-import { getDeals, getProductsByCategory } from "../_data_access/productData";
+import { db } from '@/lib/prisma';
 
 export default async function Home() {
-  const deals = await getDeals(); // Busca os dados no servidor
-  const [keyboard, mouses] = await Promise.all([
-    getDeals(),
-    getProductsByCategory("keyboards"),
-    getProductsByCategory("mouses"),
-  ]);
+  //Pegando todos produtos que tem descontos
+  const deals = await db.product.findMany({
+      where: {
+        discountPercentage: {
+          gt: 0
+        }
+      } 
+  })
+  //Pegando os produtos da categoria teclado
+  const keyboards = await db.product.findMany({
+      where: {
+        category: {
+          slug: 'keyboards'
+        }
+      }
+  })
+  //Pegando os produtos da categoria mouses
+  const mouses = await db.product.findMany({
+    where: {
+      category: {
+        slug: 'mouses'
+      }
+    }
+  })
 
   return (
     <main className="pl-4 pr-4">
@@ -27,7 +45,7 @@ export default async function Home() {
       <ProductList products={deals} />
       <Banner imageUrl={banner2} altText="Até 55% de desconto!" />
       <SectionTitle>Teclados</SectionTitle>
-      <ProductList products={keyboard} />
+      <ProductList products={keyboards} />
       <Banner imageUrl={banner3} altText="Até 20% de desconto!" />
       <SectionTitle>Mouses</SectionTitle>
       <ProductList products={mouses} />

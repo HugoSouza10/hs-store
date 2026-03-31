@@ -11,16 +11,34 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+model Category {
+  id    String @id @default(uuid())
+  name  String
+  slug  String
+  imageUrl String
+
+  // relação (1:N)
+  products  Product[]
+}
 
 model Product {
   id                  String   @id @default(uuid())
   name                String
   slug                String   @unique
-  description         String?
+  description         String
   basePrice           Decimal
   discountPercentage  Int
   imageUrls           String[]
-  categorySlug        String
+   // FK
+  categoryId	        String
+  // relação (N:1)
+  category Category @relation(fields: [categoryId], references: [id]) //“Esse produto pertence a uma categoria”
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
+  
 }
+
+/*category Category @relation(fields: [categoryId], references: [id])
+
+Basicamente estamos falando:  Esse campo categoryId aponta para o id da tabela Category
+*/
