@@ -1,9 +1,9 @@
-import { Product } from "@/types/product";
 import { calculateDiscountedPrice } from "../../app/helpers/calculatePricing";
 import { ProductItem } from "./product-item";
+import type { ProductModel } from "@/generated/prisma/models";
 
 interface ProductListProps {
-    products: Product[];
+    products: ProductModel[];
 }
 
 export const ProductList = ({ products }: ProductListProps) => {

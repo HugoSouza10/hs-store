@@ -1,13 +1,13 @@
-import { Product } from "@/types/product";
+import type { ProductModel } from "@/generated/prisma/models";
 
-export interface ProductWithDiscount extends Product {
+export interface ProductWithDiscount extends ProductModel {
     productWithDiscount: number;
 }
 
-export const calculateDiscountedPrice = (product: Product): ProductWithDiscount => {
-    const discountAmount =  (product.basePrice * product.discountPercentage) / 100;
+export const calculateDiscountedPrice = (product: ProductModel): ProductWithDiscount => {
+    const discountAmount =  (Number(product.basePrice) * Number(product.discountPercentage)) / 100;
 
-    const discountedPrice = product.basePrice - discountAmount;
+    const discountedPrice = Number(product.basePrice) - discountAmount;
 
     return {
         ...product,

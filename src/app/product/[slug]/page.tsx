@@ -9,7 +9,7 @@ import { ProductList } from "@/components/ui/product-list";
 import { db } from "@/lib/prisma";
 
 // Server component para pegar os dados do produto e renderizar a página de detalhes
-const ProductDetail = async ({ params }: { params: { slug: string } }) => {
+const ProductDetail = async ({params}: { params: { slug: string } }) => {
   const data = await db.product.findFirst({
     where: {
       slug: params.slug,

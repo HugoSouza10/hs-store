@@ -1,7 +1,7 @@
+import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
 import { Badge } from "@/components/ui/badge";
-import { Product } from "@/types/product";
 
-export const ProductPrice = ({ product }: { product: Product }) => {
+export const ProductPrice = ({ product }: { product: ProductWithDiscount }) => {
   return (
     <div className="mt-4">
       <div>

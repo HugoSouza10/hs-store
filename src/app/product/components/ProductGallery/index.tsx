@@ -1,7 +1,8 @@
 'use client';
 import Image from "next/image";
 import { useState } from "react";
-type ProductGalleryProps  = {
+
+interface ProductGalleryProps {
     images: string[],
     alt: string
 }

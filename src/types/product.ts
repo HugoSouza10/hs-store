@@ -9,5 +9,4 @@ export interface Product {
     imageUrls: string[];
     categoryId: string;
     slug: string;
-    productWithDiscount?: number;
 }
