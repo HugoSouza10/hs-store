@@ -1,0 +1,33 @@
+import { ShoppingBasket } from "lucide-react";
+import { db } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { OrderCard } from "./_components/card";
+
+// Componente de categoria no lado do servidor
+export default async function MyOrders() {
+  // Função para buscar os meus pedidos no servidor
+  const session = await auth();
+  if (!session?.user?.id) {
+    return <p>Faça login para ver seus pedidos.</p>;
+  }
+  const orders = await db.order.findMany({
+    where: {
+      userId: session.user.id,
+    },
+    include: {
+      items: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  }); // Busca os pedidos diretamente no servidor
+  console.log(orders[0].items);
+  return (
+    <div>
+      {orders.map((order) => (
+        <OrderCard key={order.id} order={order} />
+      ))}
+    </div>
+  );
+}

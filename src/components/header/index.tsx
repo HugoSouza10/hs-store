@@ -10,6 +10,7 @@ import {
   ListOrderedIcon,
   User,
   ShoppingCartIcon,
+  ShoppingBasket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -166,6 +167,15 @@ const Header = () => {
                   >
                     <ListOrderedIcon size={16} />
                     Catalog
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/my-orders"
+                    className="inline-flex items-center border border-[#1A1A1A] rounded-sm py-2 px-4 text-sm gap-2 font-medium"
+                  >
+                    <ShoppingBasket size={16} />
+                    My Orders
                   </Link>
                 </SheetClose>
               </ul>
