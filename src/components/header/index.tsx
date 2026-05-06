@@ -31,21 +31,27 @@ import { createCheckout } from "@/services/payment";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { createOrder } from "@/app/_actions/order/create-order";
+import { toast } from "sonner";
 
 const Header = () => {
   const { data: session } = useSession();
-  const { products, subtotal, totalDiscount, total } = useCart();
+  const { products, subtotal, totalDiscount, total, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
 
   async function handleCheckout() {
     console.log(products);
     try {
       console.log("USER ID:", session?.user?.id);
+      if (!products.length) {
+        toast("Carrinho vazio!");
+        return;
+      }
       if (!session?.user?.id) {
         await signIn("google"); // 👈 redireciona pro login
         return;
       }
-      const result = await createOrder({
+      setLoading(true);
+      await createOrder({
         items: products.map((product) => ({
           id: product.id,
           quantity: product.quantity, // ou do seu cart real
@@ -55,9 +61,12 @@ const Header = () => {
         discount: Number(totalDiscount),
         total: Number(total),
       });
-      console.log("ORDER CRIADA:", result);
+      clearCart();
+      toast("Compra realizada!");
     } catch (error) {
       console.error("Erro ao criar pedido:", error);
+    } finally {
+      setLoading(false);
     }
 
     // try {
@@ -178,7 +187,7 @@ const Header = () => {
             </Button>
           </SheetTrigger>
           <SheetContent className="w-auto" side="right">
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full mt-5">
               <Badge
                 className="w-fit border border-primary rounded-full py-1 pb-1"
                 variant="outline"
@@ -187,52 +196,60 @@ const Header = () => {
                 <span className="font-bold text-base">CARRINHO</span>
               </Badge>
 
-              <ScrollArea className="flex-1 h-[300px] w-full rounded-md border">
-                {products.map((product) => (
-                  <CartItem product={product} key={product.id} />
-                ))}
-              </ScrollArea>
+              {products.length > 0 && (
+                <ScrollArea className="h-[300px] w-full rounded-md border">
+                  {products.map((product) => (
+                    <CartItem product={product} key={product.id} />
+                  ))}
+                </ScrollArea>
+              )}
 
               {/* Total e Botão de Finalizar Compra */}
-              <div className="mt-11">
-                <div>
+              {products.length > 0 ? (
+                <div className="mt-11">
                   <div>
-                    <Separator className="bg-accent" />
-                    <div className="flex justify-between">
-                      <span className="text-xs pt-2 pb-2">Subtotal</span>
-                      <span className="text-xs pt-2 pb-2">
-                        {subtotal.toFixed(2)}
-                      </span>
-                    </div>
-                    <Separator className="bg-accent" />
-                    <div className="flex justify-between">
-                      <span className="text-xs pt-2 pb-2">Entrega</span>
-                      <span className="text-xs pt-2 pb-2">GRÁTIS</span>
-                    </div>
-                    <Separator className="bg-accent" />
-                    <div className="flex justify-between">
-                      <span className="text-xs pt-2 pb-2">Desconto</span>
-                      <span className="text-xs pt-2 pb-2">
-                        -R$ {totalDiscount.toFixed(2)}
-                      </span>
-                    </div>
-                    <Separator className="bg-accent" />
-                    <div className="flex justify-between font-bold">
-                      <span className="text-xs pt-2 pb-2">Total</span>
-                      <span className=" text-xs pt-2 pb-2">
-                        R$ {total.toFixed(2)}
-                      </span>
+                    <div>
+                      <Separator className="bg-accent" />
+                      <div className="flex justify-between">
+                        <span className="text-xs pt-2 pb-2">Subtotal</span>
+                        <span className="text-xs pt-2 pb-2">
+                          {subtotal.toFixed(2)}
+                        </span>
+                      </div>
+                      <Separator className="bg-accent" />
+                      <div className="flex justify-between">
+                        <span className="text-xs pt-2 pb-2">Entrega</span>
+                        <span className="text-xs pt-2 pb-2">GRÁTIS</span>
+                      </div>
+                      <Separator className="bg-accent" />
+                      <div className="flex justify-between">
+                        <span className="text-xs pt-2 pb-2">Desconto</span>
+                        <span className="text-xs pt-2 pb-2">
+                          -R$ {totalDiscount.toFixed(2)}
+                        </span>
+                      </div>
+                      <Separator className="bg-accent" />
+                      <div className="flex justify-between font-bold">
+                        <span className="text-xs pt-2 pb-2">Total</span>
+                        <span className=" text-xs pt-2 pb-2">
+                          R$ {total.toFixed(2)}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <Button
+                    disabled={!products.length || loading}
+                    onClick={handleCheckout}
+                    className="mt-4 w-full"
+                  >
+                    {loading ? "Processando..." : "Finalizar Compra"}
+                  </Button>
                 </div>
-                <Button
-                  onClick={handleCheckout}
-                  disabled={loading}
-                  className="mt-4 w-full"
-                >
-                  {loading ? "Processando..." : "Finalizar Compra"}
-                </Button>
-              </div>
+              ) : (
+                <p className="mt-11 text-sm text-base">
+                  Carrinho vazio
+                </p>
+              )}
             </div>
           </SheetContent>
         </Sheet>
