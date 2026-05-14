@@ -20,7 +20,6 @@ export const AddToCartButton = ({
     addProduct(productWithQuantity);
     toast.success("Produto adicionado com sucesso!");
   };
-  
   return (
     <button
       onClick={handleAddToCart}

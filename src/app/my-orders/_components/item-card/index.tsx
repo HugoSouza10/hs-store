@@ -7,7 +7,7 @@ type Props = {
 export function OrderItemCard({ item }: Props) {
   return (
     <div className="flex gap-4">
-      <div className="relative h-20 w-20 rounded-xl bg-zinc-900">
+      <div className="relative h-20 w-20 rounded-xl bg-accent">
         <Image
           src={item.product.imageUrls[0]}
           alt={item.product.name}
@@ -17,18 +17,18 @@ export function OrderItemCard({ item }: Props) {
       </div>
 
       <div className="flex-1 space-y-2">
-        <span className="inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs">
-          Vendido e entregue por: FSW Store
+        <span className="inline-block rounded-sm bg-accent px-3 py-1 text-[10px]">
+          Vendido e entregue por: <span className="font-semibold">FSW Store</span>
         </span>
 
-        <p>{item.product.name}</p>
+        <p className="text-sm">{item.product.name}</p>
 
         <div className="flex items-center justify-between">
-          <strong className="text-lg">
+          <strong className="text-xs">
             R$ {Number(item.price).toFixed(2)}
           </strong>
 
-          <span className="text-sm text-muted-foreground">
+          <span className="text-[#A1A1A1] text-xs">
             Qtd: {item.quantity}
           </span>
         </div>
