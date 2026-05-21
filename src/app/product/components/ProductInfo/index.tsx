@@ -1,6 +1,6 @@
-import type { ProductModel } from "@/generated/prisma/models";
+import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
 
-export const ProductInfo = (product : ProductModel) => {
+export const ProductInfo = ({ product }: { product: ProductWithDiscount }) => {
   return (
     <>
         <span className="text-[#A1A1A1] text-xs"> Novo  |  100 vendidos </span>

@@ -6,28 +6,20 @@ import { ProductPrice } from "../components/ProductPrice";
 import { ShippingInfo } from "../components/ShippingInfo";
 import { SectionTitle } from "@/components/ui/section-title";
 import { ProductList } from "@/components/ui/product-list";
-import { db } from "@/lib/prisma";
+import { getProductBySlug } from "@/app/_data_access/product/get-by-slug";
+import { getProductsByRelated } from "@/app/_data_access/product/get-related";
 
+interface Props {
+  params: {
+    slug: string
+  }
+}
 // Server component para pegar os dados do produto e renderizar a página de detalhes
-const ProductDetail = async ({params}: { params: { slug: string } }) => {
-  const data = await db.product.findFirst({
-    where: {
-      slug: params.slug,
-    },
-    include: {
-      category: true,
-    },
-  });
+const ProductDetail = async ( {params: { slug }}: Props) => {
+  const data = await getProductBySlug(slug);
   if (!data) return null;
   const product = calculateDiscountedPrice(data);
-  const relatedProducts = await db.product.findMany({
-    where: {
-      categoryId: data.categoryId,
-      NOT: {
-        id: data.id,
-      },
-    },
-  });
+  const relatedProducts = await getProductsByRelated(product);
   return (
     <div>
       <ProductGallery images={data.imageUrls} alt={data.slug} />

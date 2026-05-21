@@ -5,33 +5,11 @@ import banner1 from "./img/banner-home-1.png";
 import banner2 from "./img/banner-home-2.png";
 import banner3 from "./img/banner-home-3.png";
 import { ProductList } from "@/components/ui/product-list";
-import { db } from '@/lib/prisma';
+import { getHomeProducts } from "@/app/_data_access/product/get-home";
 
 export default async function Home() {
   //Pegando todos produtos que tem descontos
-  const deals = await db.product.findMany({
-      where: {
-        discountPercentage: {
-          gt: 0
-        }
-      } 
-  })
-  //Pegando os produtos da categoria teclado
-  const keyboards = await db.product.findMany({
-      where: {
-        category: {
-          slug: 'keyboards'
-        }
-      }
-  })
-  //Pegando os produtos da categoria mouses
-  const mouses = await db.product.findMany({
-    where: {
-      category: {
-        slug: 'mouses'
-      }
-    }
-  })
+  const { deals, keyboards, mouses } = await getHomeProducts();
 
   return (
     <main className="pl-4 pr-4">

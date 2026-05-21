@@ -166,7 +166,7 @@ const Header = () => {
                     className="inline-flex items-center border border-[#1A1A1A] rounded-sm py-2 px-4 text-sm gap-2 font-medium"
                   >
                     <ListOrderedIcon size={16} />
-                    Catalog
+                    Catálogo
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
@@ -175,7 +175,7 @@ const Header = () => {
                     className="inline-flex items-center border border-[#1A1A1A] rounded-sm py-2 px-4 text-sm gap-2 font-medium"
                   >
                     <ShoppingBasket size={16} />
-                    My Orders
+                    Meus pedidos
                   </Link>
                 </SheetClose>
               </ul>
