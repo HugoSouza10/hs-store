@@ -13,7 +13,6 @@ export async function createOrder(cart: CreateOrderInput) {
   }
   const validatedCart = createOrderSchema.parse(cart);
 
-  console.log(cart)
   const order = await db.order.create({
     //Data: Sempre vai existir, pois no prisma a gente precisa especificar esses dados através desse objeto
     data: {

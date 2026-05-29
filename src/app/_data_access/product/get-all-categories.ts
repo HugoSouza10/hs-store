@@ -1,3 +1,5 @@
+//server-only serve para garantir que um módulo seja usado apenas no servidor no Next.js.
+import "server-only";
 import { unstable_cache } from "next/cache";
 import { db } from "@/lib/prisma";
 
