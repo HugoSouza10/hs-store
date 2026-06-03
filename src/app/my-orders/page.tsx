@@ -22,7 +22,6 @@ export default async function MyOrders() {
       },
     },
   }); // Busca os pedidos diretamente no servidor
-  console.log(orders[0].items);
   return (
     <>
       <div className="flex justify-center items-center border border-primary uppercase p-3 rounded-full w-fit text-xs font-bold m-4">

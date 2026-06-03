@@ -31,18 +31,32 @@ import { createCheckout } from "@/services/payment";
 // Em qualquer componente do carrinho
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
+import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/app/_actions/order/create-order";
 import { toast } from "sonner";
+
 
 const Header = () => {
   const { data: session } = useSession();
   const { products, subtotal, totalDiscount, total, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
 
+  const { execute: executeCreateOrder, status } = useAction(createOrder, {
+    onSuccess: () => {
+      toast.success("Pedido realizado!");
+    },
+    onError: ({ error }) => {
+      console.error("Erro ao criar pedido:", error);
+
+      toast.error(
+        error.serverError ??
+          "Não foi possível finalizar a compra."
+      );
+    },
+  });
   async function handleCheckout() {
     console.log(products);
-    try {
-      console.log("USER ID:", session?.user?.id);
+    console.log("USER ID:", session?.user?.id);
       if (!products.length) {
         toast("Carrinho vazio!");
         return;
@@ -52,7 +66,7 @@ const Header = () => {
         return;
       }
       setLoading(true);
-      await createOrder({
+      executeCreateOrder({
         items: products.map((product) => ({
           id: product.id,
           quantity: product.quantity, // ou do seu cart real
@@ -63,12 +77,8 @@ const Header = () => {
         total: Number(total),
       });
       clearCart();
-      toast("Compra realizada!");
-    } catch (error) {
-      console.error("Erro ao criar pedido:", error);
-    } finally {
       setLoading(false);
-    }
+      
 
     // try {
     //    setLoading(true);
@@ -256,9 +266,7 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <p className="mt-11 text-sm text-base">
-                  Carrinho vazio
-                </p>
+                <p className="mt-11 text-sm text-base">Carrinho vazio</p>
               )}
             </div>
           </SheetContent>
@@ -267,5 +275,4 @@ const Header = () => {
     </header>
   );
 };
-
 export default Header;

@@ -2,36 +2,39 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { createOrderSchema, CreateOrderInput } from "./schemas";
+import { createOrderSchema } from "./schemas";
+import { actionClient } from "@/lib/safe-action";
+import { revalidatePath } from "next/cache";
 
-//Responsável por criar o pedido de acordo com usuário
-export async function createOrder(cart: CreateOrderInput) {
-  const session = await auth();
+export const createOrder = actionClient
+  .schema(createOrderSchema)
 
-  if (!session?.user?.id) {
-    throw new Error("Usuário não autenticado");
-  }
-  const validatedCart = createOrderSchema.parse(cart);
+  .action(async ({ parsedInput }) => {
+    const session = await auth();
 
-  const order = await db.order.create({
-    //Data: Sempre vai existir, pois no prisma a gente precisa especificar esses dados através desse objeto
-    data: {
-      userId: session.user.id,
-      subtotal: validatedCart.subtotal,
-      discount: validatedCart.discount,
-      total: validatedCart.total,
-      status: "PAGO",
+    if (!session?.user?.id) {
+      throw new Error("Usuário não autenticado");
+    }
 
-      //Aqui vamos criar o OrderItem
-      items: {
-        create: validatedCart.items.map((item) => ({
-          productId: item.id,
-          quantity: item.quantity,
-          price: item.price,
-        })),
+    const order = await db.order.create({
+      data: {
+        userId: session.user.id,
+
+        subtotal: parsedInput.subtotal,
+        discount: parsedInput.discount,
+        total: parsedInput.total,
+
+        status: "PAGO",
+
+        items: {
+          create: parsedInput.items.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        },
       },
-    },
+    });
+    revalidatePath("/my-orders");
+    return order;
   });
-
-  return order;
-}
