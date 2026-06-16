@@ -10,9 +10,10 @@ import { CardContent } from "@/components/ui/card";
 import { OrderInfo } from "../info";
 import { OrderItemsList } from "../items-list";
 import { OrderFooter } from "../footer";
+import { OrderCardProps } from "@/types/OrderCard";
 
 type Props = {
-  order: any;
+  order: OrderCardProps;
 };
 
 export function OrderCard({ order }: Props) {
