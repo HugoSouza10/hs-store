@@ -1,14 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { db } from "@/lib/prisma";
 
-export const productSelect = {
-  id: true,
-  name: true,
-  slug: true,
-  basePrice: true,
-  discountPercentage: true,
-  imageUrls: true,
-};
 //Cache para pegar os produtos da home
 export const getHomeProducts = unstable_cache(
   async () => {
