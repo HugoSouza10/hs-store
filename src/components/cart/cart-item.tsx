@@ -1,9 +1,8 @@
-import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import { Trash } from "lucide-react";
 import Image from 'next/image';
-import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
 import { QuantitySelector } from "@/components/ui/QuantitySelector";
+import { formatCurrency } from "@/app/helpers/currecy";
 
 export default function CartItem({product}: any) {
     const { removeProduct } = useCart();
@@ -35,8 +34,8 @@ export default function CartItem({product}: any) {
                 </span>
               </div>
               <div>
-                <span className="font-bold text-sm">R$: {product.productWithDiscount}</span>
-                <span className="text-xs ml-1 line-through text-[#676767]">R$: {product.basePrice}</span>
+                <span className="font-bold text-sm">{formatCurrency(product.productWithDiscount)}</span>
+                <span className="text-xs ml-1 line-through text-[#676767]">{formatCurrency(product.basePrice)}</span>
               </div>
               <QuantitySelector id={product.id} quantity={product.quantity}/>
             </div>

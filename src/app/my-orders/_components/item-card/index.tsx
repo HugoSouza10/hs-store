@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/app/helpers/currecy";
 import Image from "next/image";
 
 type Props = {
@@ -25,7 +26,7 @@ export function OrderItemCard({ item }: Props) {
 
         <div className="flex items-center justify-between">
           <strong className="text-xs">
-            R$ {Number(item.price).toFixed(2)}
+            {(formatCurrency(Number(item.price)))}
           </strong>
 
           <span className="text-[#A1A1A1] text-xs">

@@ -34,6 +34,7 @@ import { useState } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/app/_actions/order/create-order";
 import { toast } from "sonner";
+import { formatCurrency } from "@/app/helpers/currecy";
 
 
 const Header = () => {
@@ -233,7 +234,7 @@ const Header = () => {
                       <div className="flex justify-between">
                         <span className="text-xs pt-2 pb-2">Subtotal</span>
                         <span className="text-xs pt-2 pb-2">
-                          {subtotal.toFixed(2)}
+                          {formatCurrency(Number(subtotal))}
                         </span>
                       </div>
                       <Separator className="bg-accent" />
@@ -245,14 +246,14 @@ const Header = () => {
                       <div className="flex justify-between">
                         <span className="text-xs pt-2 pb-2">Desconto</span>
                         <span className="text-xs pt-2 pb-2">
-                          -R$ {totalDiscount.toFixed(2)}
+                          {formatCurrency(Number(totalDiscount))}
                         </span>
                       </div>
                       <Separator className="bg-accent" />
                       <div className="flex justify-between font-bold">
                         <span className="text-xs pt-2 pb-2">Total</span>
                         <span className=" text-xs pt-2 pb-2">
-                          R$ {total.toFixed(2)}
+                           {formatCurrency(Number(total))}
                         </span>
                       </div>
                     </div>

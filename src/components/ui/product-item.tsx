@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Badge } from "./badge"
 import Link from "next/link"
 import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
+import { formatCurrency } from "@/app/helpers/currecy";
 
 
 export const ProductItem = ({product}: {product: ProductWithDiscount}) => {
@@ -40,8 +41,8 @@ export const ProductItem = ({product}: {product: ProductWithDiscount}) => {
                </span>
             </div>
             <div>
-               <span className="font-bold">R$: {product.productWithDiscount}</span>
-               <span className="text-xs ml-1 line-through text-[#676767]">R$: {product.basePrice}</span>
+               <span className="font-bold">{formatCurrency(product.productWithDiscount)}</span>
+               <span className="text-xs ml-1 line-through text-[#676767]">{formatCurrency(Number(product.basePrice))}</span>
             </div>
          </div>
       </div>
