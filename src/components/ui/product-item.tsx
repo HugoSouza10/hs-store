@@ -3,8 +3,7 @@ import Image from "next/image"
 import { Badge } from "./badge"
 import Link from "next/link"
 import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
-import { formatCurrency } from "@/app/helpers/currecy";
-
+import { formatCurrency } from "@/app/helpers/currency";
 
 export const ProductItem = ({product}: {product: ProductWithDiscount}) => {
    return (

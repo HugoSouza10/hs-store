@@ -1,5 +1,5 @@
 import { ProductWithDiscount } from "@/app/helpers/calculatePricing";
-import { formatCurrency } from "@/app/helpers/currecy";
+import { formatCurrency } from "@/app/helpers/currency";
 import { Badge } from "@/components/ui/badge";
 
 export const ProductPrice = ({ product }: { product: ProductWithDiscount }) => {

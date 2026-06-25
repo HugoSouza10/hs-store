@@ -36,11 +36,11 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
     const  [products, setProducts] = useState<CartProduct[]>([]);
 
     const subtotal = useMemo(()=> {
-        return products.reduce((sum, product) => sum + (product.basePrice * product.quantity), 0);
+        return products.reduce((sum, product) => sum + (Number(product.basePrice) * product.quantity), 0);
     }, [products]);
 
     const totalDiscount = useMemo(()=> {
-        return products.reduce((sum, product) => sum + (Math.max(0, (product.basePrice  -  product.productWithDiscount)) * product.quantity), 0);
+        return products.reduce((sum, product) => sum + (Math.max(0, (Number(product.basePrice)  -  product.productWithDiscount)) * product.quantity), 0);
     }, [products]);
     
     const total = useMemo(() => {

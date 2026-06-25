@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/app/helpers/currecy";
+import { formatCurrency } from "@/app/helpers/currency";
 
 type Props = {
   order: any;

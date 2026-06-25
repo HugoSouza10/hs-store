@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/app/helpers/currecy";
+import { formatCurrency } from "@/app/helpers/currency";
 import Image from "next/image";
 
 type Props = {

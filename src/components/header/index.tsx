@@ -34,7 +34,7 @@ import { useState } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/app/_actions/order/create-order";
 import { toast } from "sonner";
-import { formatCurrency } from "@/app/helpers/currecy";
+import { formatCurrency } from "@/app/helpers/currency";
 
 
 const Header = () => {

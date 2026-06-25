@@ -2,7 +2,7 @@ import { useCart } from "@/context/CartContext";
 import { Trash } from "lucide-react";
 import Image from 'next/image';
 import { QuantitySelector } from "@/components/ui/QuantitySelector";
-import { formatCurrency } from "@/app/helpers/currecy";
+import { formatCurrency } from "@/app/helpers/currency";
 
 export default function CartItem({product}: any) {
     const { removeProduct } = useCart();
