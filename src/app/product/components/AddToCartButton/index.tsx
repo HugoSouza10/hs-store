@@ -18,7 +18,10 @@ export const AddToCartButton = ({
       quantity: 1, // Define a quantidade como 1
     };
     addProduct(productWithQuantity);
-    toast.success("Produto adicionado com sucesso!");
+    console.log(productWithQuantity)
+    if(productWithQuantity.quantity > 0) 
+      return toast.success("Produto adicionado com sucesso!");
+    
   };
   return (
     <button
