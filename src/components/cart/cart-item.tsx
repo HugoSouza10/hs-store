@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { QuantitySelector } from "@/components/ui/QuantitySelector";
 import { formatCurrency } from "@/app/helpers/currency";
 
+
 export default function CartItem({product}: any) {
     const { removeProduct } = useCart();
 
@@ -39,9 +40,9 @@ export default function CartItem({product}: any) {
               </div>
               <QuantitySelector id={product.id} quantity={product.quantity}/>
             </div>
-            <div onClick={handleremoveProductFromCartClick} className="flex items-center justify-center w-8 h-8 border border-[#1A1A1A] rounded-sm p-2">
+            <button aria-label="Remover produto" onClick={handleremoveProductFromCartClick} className="flex items-center justify-center w-8 h-8 border border-[#1A1A1A] rounded-sm p-2">
               <Trash size={16}/>
-            </div>
+            </button>
         </div>
       </>
     );

@@ -24,11 +24,11 @@ export const QuantitySelector = ({id, quantity}: QuantitySelectorProps) => {
 
     return (
         <div className="flex items-center">
-             <Button onClick={() => incrementProductQuantity(id, -1)} variant="outline" size="icon" className="size-8 border-[#1A1A1A]">
+             <Button aria-label="Diminuir quantidade" onClick={() => incrementProductQuantity(id, -1)} variant="outline" size="icon" className="size-8 border-[#1A1A1A]">
                 <ChevronLeftIcon />
             </Button>
             <div>{quantity}</div>
-             <Button onClick={() => incrementProductQuantity(id, 1)} variant="outline" size="icon" className="size-8 border-[#1A1A1A] rounded-sm">
+             <Button aria-label="Aumentar quantidade" onClick={() => incrementProductQuantity(id, 1)} variant="outline" size="icon" className="size-8 border-[#1A1A1A] rounded-sm">
                 <ChevronRightIcon />
             </Button>
         </div>
