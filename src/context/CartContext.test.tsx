@@ -251,6 +251,9 @@ describe("CartContext", () => {
       });
 
       expect(result.current.products).toEqual([]);
+      expect(result.current.subtotal).toBe(0);
+      expect(result.current.totalDiscount).toBe(0);
+      expect(result.current.total).toBe(0);
     });
   });
 
@@ -273,7 +276,6 @@ describe("CartContext", () => {
     });
 
     it("deve calcular o subtotal de todos os produtos do carrinho", () => {
-
       const { result } = renderHook(() => useCart(), { wrapper });
 
       act(() => {
@@ -293,6 +295,50 @@ describe("CartContext", () => {
       });
 
       expect(result.current.subtotal).toBe(250);
+    });
+  });
+
+  describe("totalDiscount", () => {
+    it("deve calcular corretamente o desconto total do carrinho com 20 porcento", () => {
+      const product = makeProductWithDiscount({
+        id: "produto-1",
+        basePrice: new Decimal(100),
+        productWithDiscount: 80,
+      });
+
+      const { result } = renderHook(() => useCart(), { wrapper });
+
+      //Vai atualizar o contexto com o produto adicionado ao carrinho
+      act(() => {
+        result.current.addProduct({
+          ...product,
+          quantity: 1,
+        });
+      });
+
+      expect(result.current.totalDiscount).toBe(20);
+    });
+  });
+
+  describe("Total", () => {
+    it("deve calcular o total subtraindo o desconto do subtotal", () => {
+      const product = makeProductWithDiscount({
+        id: "produto-1",
+        basePrice: new Decimal(100),
+        productWithDiscount: 80,
+      });
+
+      const { result } = renderHook(() => useCart(), { wrapper });
+
+      //Vai atualizar o contexto com o produto adicionado ao carrinho
+      act(() => {
+        result.current.addProduct({
+          ...product,
+          quantity: 1,
+        });
+      });
+
+      expect(result.current.total).toBe(80);
     });
   });
 });
