@@ -3,13 +3,15 @@
 import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { ProductWithDiscount } from "../app/helpers/calculatePricing";
 
-//Basicamente adicionar uma propriedade totalPrice no Product
+//Um CartProduct tem tudo que ProductWithDiscount tem, mais quantity.
 export interface CartProduct extends ProductWithDiscount {
   quantity: number;
 }
 
+//Quem usar useCart() vai poder acessar essas coisas.
 interface CartContextData {
   products: CartProduct[];
+  initialProducts?: CartProduct[];
   subtotal: number;
   totalDiscount: number;
   total: number;
@@ -19,9 +21,10 @@ interface CartContextData {
   clearCart: () => void;
 }
 
-//Criando o contexto com dados iniciais.
+//React, crie um Context que terá esse formato
 const CartContext = createContext<CartContextData>({
   products: [],
+  initialProducts: [],
   subtotal: 0,
   totalDiscount: 0,
   total: 0,
@@ -31,9 +34,16 @@ const CartContext = createContext<CartContextData>({
   clearCart: () => {},
 });
 
+//Interface criada para receber props recebibas
+interface CartProviderProps {
+  children: ReactNode;
+  initialProducts?: CartProduct[];
+}
+
 // Local onde vai ser exportado e atualizado disponibilizando assim para todos os componentes.
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<CartProduct[]>([]);
+export const CartProvider = ({ children, initialProducts = [] }: CartProviderProps) => {
+  //O estado do meu carrinho começa com initialProducts
+  const [products, setProducts] = useState<CartProduct[]>(initialProducts);
 
   const subtotal = useMemo(() => {
     return products.reduce(
