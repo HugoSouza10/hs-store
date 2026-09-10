@@ -10,7 +10,7 @@ import { QuantitySelector } from "@/components/ui/QuantitySelector";
 const product = makeProductWithDiscount({
   id: "produto-1",
   name: "produto-1",
-  basePrice: new Decimal(100),
+  basePrice: new Decimal(200),
 });
 
 function CartItems() {
@@ -43,7 +43,8 @@ function QuantitySelectorComponent() {
   );
 }
 
-describe("CartItem", () => {
+describe("CartItem - integração", () => {
+  //Testes de integração
   it("deve remover o produto do carrinho", async () => {
     const user = userEvent.setup();
 
@@ -109,5 +110,43 @@ describe("CartItem", () => {
       screen.getByRole("button", { name: /Aumentar quantidade/i }),
     );
     expect(screen.getByText("4")).toBeInTheDocument();
+  });
+});
+
+describe("CartItem - unitários", () => {
+  it("deve renderizar o nome do produto ", () => {
+    render(
+      <CartItem
+        product={{
+          ...product,
+          quantity: 1,
+        }}
+      ></CartItem>,
+    );
+    expect(screen.getByText("produto-1")).toBeInTheDocument();
+  });
+
+  it("deve renderizar o preço base", () => {
+    render(
+      <CartItem
+        product={{
+          ...product,
+          quantity: 1,
+        }}
+      ></CartItem>,
+    );
+    expect(screen.getByText("R$ 200,00")).toBeInTheDocument();
+  });
+
+  it("Deve renderizar preço com desconto", () => {
+    render(
+      <CartItem
+        product={{
+          ...product,
+          quantity: 1,
+        }}
+      ></CartItem>,
+    );
+    expect(screen.getByText("R$ 100,00")).toBeInTheDocument();
   });
 });
